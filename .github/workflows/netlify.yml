@@ -1,3 +1,5 @@
+# 参考にした。thx!：https://qiita.com/nwtgck/items/e9a355c2ccb03d8e8eb0
+
 name: Netlify
 
 on:
@@ -6,14 +8,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
       
       # HTML書き出し（ビルド）
       - name: Making html
-        run: gradlew browserWebpack 
+        run: ./gradlew browserWebpack 
       
       # Netlifyにデプロイする
       - name: Upload netlify
