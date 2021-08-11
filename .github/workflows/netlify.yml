@@ -10,9 +10,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      # Netlifyにデプロイする。「--dir=./dist」の部分はビルド結果ができあがるディレクトリ名に変えましょう。
-      - run: npx netlify-cli deploy --dir=./build/distributions
+      
+      # HTML書き出し（ビルド）
+      - name: Making html
+        run: gradlew browserWebpack 
+      
+      # Netlifyにデプロイする
+      - name: Upload netlify
+        run: npx netlify-cli deploy --dir=./build/distributions
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
